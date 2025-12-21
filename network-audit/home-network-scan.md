@@ -14,56 +14,15 @@ Se realizó un escaneo de la red doméstica (10.0.0.0/24) identificando **17 dis
 
 ## Metodología
 
-### Reconocimiento Inicial
+### Reconocimiento I### Actualización 20/12/2025 - Análisis de Dispositivos Críticos
+Se realizó un escaneo profundo (-sS -sV -O -p-) sobre los objetivos 10.0.0.252 y 10.0.0.63.
 
-**Identificación de red propia:**
-```bash
-ip addr show
-# IP asignada: 10.0.0.253/24
+#### Hallazgos:
+1. **IP 10.0.0.63 (Servidor de Monitoreo):**
+   - Identificado servicio **Nagios NSCA**. Probable cambio de IP del servidor Nagios previamente detectado en .29.
+   - **Riesgo:** Puerto 1080 (SOCKS5) abierto. Necesita revisión de autenticación.
+   - Presencia de Firewall (49,140 puertos filtrados).
 
-ip route | grep default
-# Gateway: 10.0.0.1
-```
-
-### Escaneo de Red
-
-**Comando utilizado:**
-```bash
-sudo nmap -sn 10.0.0.0/24
-```
-
-**Parámetros:**
-- `-sn`: Ping scan (descubrimiento de hosts sin escaneo de puertos)
-- `10.0.0.0/24`: Rango completo de la red (256 direcciones)
-
----
-
-## Hallazgos
-
-### Dispositivos Identificados
-
-| IP | Fabricante | Tipo Probable |
-|---|---|---|
-| 10.0.0.1 | Huawei Technologies | Router |
-| 10.0.0.18 | Nexxt Solutions | Dispositivo de red |
-| 10.0.0.20 | Amazon Technologies | Echo/Fire TV |
-| 10.0.0.107 | AzureWave Technology | Móvil/Tablet |
-| 10.0.0.206 | Intel Corporate | Laptop |
-| 10.0.0.252 | Dell | PC |
-| 10.0.0.253 | - | Kali Linux VM (este dispositivo) |
-
-**Dispositivos sin identificar:** 10.0.0.22, 10.0.0.26, 10.0.0.29, 10.0.0.33, 10.0.0.216
-
----
-
-## Próximos Pasos
-
-- [ ] Escaneo de puertos en dispositivos sin identificar
-- [ ] Análisis de servicios expuestos en dispositivos críticos
-- [ ] Evaluación de configuración de seguridad del router
-
----
-
-## Conclusiones
-
-Se identificaron exitosamente todos los dispositivos activos en la red. Se recomienda investigación adicional sobre dispositivos "Unknown" y evaluación de puertos abiertos en dispositivos identificados.
+2. **IP 10.0.0.252:**
+   - Confirmado como dispositivo móvil (Android 10-12).
+   - Servicio `tcpwrapped` detectado; alta restricción de conexión.
