@@ -166,3 +166,43 @@ El router Huawei (10.0.0.1) es el **punto de entrada y salida de toda la red**. 
 3. **Largo plazo**:
    - Actualizar firmware a última versión disponible
    - Implementar autenticación de dos factores si es soportada
+## Conclusiones Finales de la Auditoría de Red - Enero 2026
+
+### Resumen Ejecutivo
+La auditoría identificó varios dispositivos en la red 10.0.0.0/24, incluyendo 7 dispositivos desconocidos con diferentes niveles de protección. El análisis reveló riesgos críticos de seguridad que requieren atención inmediata.
+
+### Hallazgos Críticos
+1. **Riesgo Crítico**: Telnet habilitado en el router principal (10.0.0.1:23)
+   - **Impacto**: Credenciales transmitidas en texto plano
+   - **Recomendación**: Deshabilitar inmediatamente
+
+2. **Acceso Administrativo Limitado**: Sin credenciales del router, no se puede verificar configuración de seguridad completa
+
+3. **Dispositivos con Firewall Agresivo**: 10.0.0.23 y 10.0.0.38 bloquean todos los escaneos, indicando protección pero también opacidad
+
+### Recomendaciones Priorizadas
+
+#### Inmediatas (24-48 horas):
+- Deshabilitar Telnet en el router
+- Verificar y fortalecer credenciales administrativas
+- Documentar todos los dispositivos conocidos
+
+#### Corto Plazo (1-2 semanas):
+- Obtener acceso administrativo al router
+- Configurar firewall apropiado
+- Migrar servicios administrativos a protocolos seguros
+
+#### Largo Plazo (1-2 meses):
+- Implementar segmentación de red
+- Actualizar firmware de todos los dispositivos
+- Establecer monitoreo continuo de la red
+
+### Lecciones Aprendidas
+1. **Importancia de la documentación**: Sin inventario actualizado, es imposible identificar dispositivos sospechosos
+2. **Principio de menor privilegio**: Servicios innecesarios (como Telnet) incrementan la superficie de ataque
+3. **Monitoreo continuo**: La red cambia constantemente, requiere auditorías regulares
+
+### Próximos Pasos
+1. Investigar métodos legítimos para obtener credenciales del router
+2. Explorar herramientas de monitoreo de red continua
+3. Iniciar plan de fortalecimiento de seguridad perimetral
