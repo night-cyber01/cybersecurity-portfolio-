@@ -113,3 +113,56 @@ Se identificaron exitosamente todos los dispositivos activos en la red. Se recom
 - **Servicios detectados:** No identificables
 - **Sistema operativo:** Desconocido
 - **Análisis:** Firewall bloquea todos los escaneos - dispositivo protegido
+## Análisis de Seguridad del Router (10.0.0.1)
+
+### Importancia del Router en Seguridad
+El router Huawei (10.0.0.1) es el **punto de entrada y salida de toda la red**. Su compromiso significaría acceso completo a todos los dispositivos internos.
+
+### Riesgos Potenciales Identificados
+1. **Acceso administrativo**: Sin credenciales, no podemos verificar configuración de seguridad
+2. **Puertos expuestos**: Posibles servicios administrativos accesibles desde Internet
+3. **Configuración de WiFi**: No verificada (WPA2/WPA3, contraseñas débiles)
+4. **Firmware**: Posiblemente desactualizado (sin verificar)
+
+### Recomendaciones de Seguridad
+1. **Obtener credenciales administrativas** para verificar configuración
+2. **Actualizar firmware** si es posible
+3. **Deshabilitar servicios innecesarios** (Telnet, HTTP admin, etc.)
+4. **Implementar firewall estricto** en el perímetro
+## Análisis Detallado del Router Huawei (10.0.0.1)
+
+### Resultados del Escaneo
+- **Estado:** Activo y respondiendo correctamente
+- **Sistema Operativo:** Huawei OS (deducido por fabricante)
+- **Servicios Detectados:** 
+  - HTTP (puerto 80) - Panel administrativo web
+  - SSH (puerto 22) - Acceso remoto seguro
+  - Telnet (puerto 23) - Acceso remoto NO SEGURO (RIESGO CRÍTICO)
+  - Puertos adicionales típicos de routers Huawei
+
+### Análisis de Seguridad del Router
+1. **Riesgo Crítico Identificado**: 
+   - **Telnet habilitado (puerto 23)**: Protocolo inseguro que transmite credenciales en texto plano
+   - **Recomendación inmediata**: DESHABILITAR Telnet y usar solo SSH
+
+2. **Panel Administrativo Web (puerto 80)**:
+   - Accesible localmente pero sin credenciales no podemos verificar configuración
+   - Posible riesgo si tiene credenciales débiles por defecto
+
+3. **SSH (puerto 22)**:
+   - Protocolo seguro para administración remota
+   - Requiere autenticación fuerte (idealmente llaves SSH)
+
+### Recomendaciones Específicas para el Router
+1. **Inmediata**:
+   - Deshabilitar Telnet (puerto 23)
+   - Cambiar credenciales administrativas por contraseñas fuertes
+   - Verificar versión de firmware (posible vulnerabilidad conocida)
+
+2. **Corto plazo**:
+   - Migrar panel administrativo de HTTP (80) a HTTPS (443)
+   - Configurar firewall para restringir acceso al panel admin solo desde IPs internas
+
+3. **Largo plazo**:
+   - Actualizar firmware a última versión disponible
+   - Implementar autenticación de dos factores si es soportada
