@@ -32,3 +32,15 @@ bandit1@bandit:~$ cat ./- 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
 - Para leer archivos con nombres especiales, se usa `./` para especificar ruta relativa
 - Este es un concepto **crítico** en ciberseguridad: atacantes a menudo usan nombres de archivo especiales para ocultar malware
 - **Lección de seguridad**: Siempre usar comillas o prefijos (`./`) con nombres de archivo no confiables
+### Nivel 2 → Nivel 3
+- **Contraseña obtenida**: 263JGJPfgU6LtdEvgfWU1XP5yac29mFx
+- **Método**: Lectura de archivo con espacios y guiones en el nombre
+- **Nueva contraseña**: MNk8KNH3Usiio41PRUEoDFPqfxLPlSmx
+- **Concepto aprendido**: Manejo seguro de nombres de archivo especiales y rutas relativas
+- **Comando ejecutado**: `cat "./--spaces in this filename--"`
+- **Análisis técnico**:
+- **Descubrimiento clave**: Los dos guiones iniciales (`--`) confunden al parser de `cat`
+- `--` es interpretado como "fin de opciones de comando" en muchos programas Unix
+- **Solución**: Usar ruta relativa (`./`) para evitar interpretación como opción
+- **Lección de seguridad**: Nombres de archivo maliciosos pueden evadir validaciones simples
+- **Práctica profesional**: Siempre usar rutas explícitas con archivos de origen desconocido
